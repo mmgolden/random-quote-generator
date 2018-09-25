@@ -1,0 +1,129 @@
+/* Random Quote Generator Styles */
+
+body {
+  background: #36b55c;
+  color: white;
+  font-family: 'Muli', sans-serif;
+  font-size: 16px;
+  transition: background 0.5s;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 50px auto 0 auto;
+}
+
+#quote-box {
+  width: 75%;
+}
+
+.quote {
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.5;
+  position: relative;
+  margin: 0;
+  font-family: 'Merriweather', serif;
+}
+
+.quote:before {
+  content: url('../svg/quotes.svg');
+  position: absolute;
+  top: -0.5em;
+  left: -1.3em;
+  width: 1em;
+  opacity: 0.6;
+}
+
+.source {
+  font-size: 1.25rem;
+  letter-spacing: 0.05em;
+  line-height: 1.1;
+  text-align: right;
+}
+
+.source:before {
+  content: "—";
+}
+
+.title:before {
+  content: ", ";
+  font-style: normal;
+}
+
+.citation {
+  font-style: italic;
+}
+
+.citation:before {
+  content: ", ";
+  font-style: normal;
+}
+
+.year:before {
+  content: ", ";
+  font-style: normal;
+}
+
+#loadQuote {
+  margin-top:2em;
+  width: 15em;
+  display: inline-block;
+  border: 2px solid transparent;
+  color: #fff;
+  background: rgba(255,255,255,.2);
+  padding: 20px 0;
+  -webkit-transition: background .5s, border .5s;
+  -o-transition: background .5s, border .5s;
+  transition: background .5s, border .5s;
+  font-size: 1.1rem;
+  text-transform: uppercase; 
+  font-weight: 700;
+}
+#loadQuote:hover {
+  background: rgba(255,255,255,0);
+  border: 2px solid #fff;
+}
+
+#loadQuote:focus {
+  outline: none;
+}
+
+@media screen and (min-width: 767px) {
+  #quote-box {
+    width: 60%;
+  }
+  .quote {
+    font-size: 1.5rem;
+  }
+}
+@media screen and (min-width:991px) {
+  #quote-box {
+    width: 70%;
+  }
+  .quote {
+    font-size: 2rem;
+  }
+  .quote:before {
+    width: 1.5em;
+    top: -1em;
+    left: -2em;
+  }
+  .container {
+    margin-top: 80px;
+  }
+}
