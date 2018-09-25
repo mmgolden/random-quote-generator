@@ -32,31 +32,41 @@ const quotes = [
 ];
 
 // An array of hex codes
-const colors = ['#36b55c', '#5D3137', '#A6494F', '#48a59f', '#5f3277'];
+const colors = ['#36b55c', '#5D3137', '#A6494F', '#48a59f', '#5f3277', '#3f85b7', '#962a96'];
 
+// Get a random number
+function getRandomNumber(array) {
+    return Math.floor(Math.random() * array.length);
+}
 
-// Create a random number and return a random quote object from the array
+// Return a random quote object from the array
 function getRandomQuote(array) {
-    const index = Math.floor(Math.random() * array.length);
+    const index = getRandomNumber(array);
     return array[index];
 }
 
-// Insert the random quote into the DOM and change the background color
-function printQuote() {
-    // Get a random quote
-    const random = getRandomQuote(quotes);
+// Change the background to a random color
+function getRandomColor(array) {
+    const index = getRandomNumber(array);
+    document.querySelector('body').style.background = array[index];
+}
 
-    // Only show the citation and year if they exist in the object
+// Insert the random quote into the DOM and change the background color
+// Only show the title, citation and year if they exist in the object
+function printQuote() {
+    const random = getRandomQuote(quotes);
+    
     const markup = `
         <p class="quote">${random.quote}</p>
         <p class="source">${random.source}${random.title ? `<span class="title">${random.title}</span>` : ''}${random.citation ? `<span class="citation">${random.citation}</span>` : ''}${random.year ? `<span class="year">${random.year}</span>` : ''}</p>
     `;
     document.getElementById('quote-box').innerHTML = markup;
 
-    // Change the background to a random color
-    const index = Math.floor(Math.random() * colors.length);
-    document.querySelector('body').style.background = colors[index];
+    getRandomColor(colors);
 }
+
+// Initialize
+printQuote();
 
 // When the "Show another quote" button is clicked the "printQuote" function is called
 document.getElementById('loadQuote').addEventListener("click", printQuote, false);
