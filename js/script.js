@@ -34,6 +34,9 @@ const quotes = [
 // An array of hex codes
 const colors = ['#36b55c', '#5D3137', '#A6494F', '#48a59f', '#5f3277', '#3f85b7', '#962a96'];
 
+// Counter
+let counter = 0;
+
 // Get a random number
 function getRandomNumber(array) {
     return Math.floor(Math.random() * array.length);
@@ -49,6 +52,16 @@ function getRandomQuote(array) {
 function getRandomColor(array) {
     const index = getRandomNumber(array);
     document.querySelector('body').style.background = array[index];
+}
+
+// Add one to the counter every one second
+// If the counter reaches 15 then refresh the quote and reset the counter to 0
+function autoRefresh() {
+    counter++
+    if (counter === 15) {
+        printQuote();
+        counter = 0;
+    }
 }
 
 // Insert the random quote into the DOM and change the background color
@@ -68,11 +81,11 @@ function printQuote() {
 // Initialize
 printQuote();
 
-// Refresh the quote after 15 seconds
-let intervalID = setInterval(printQuote, 15000);
+// Calls the autoRefresh() function every second
+setInterval(autoRefresh, 1000);
 
-// When the "Show another quote" button is clicked the "printQuote" function is called and setInterval() is stopped
+// When the "Show another quote" button is clicked the "printQuote" function is called and the counter is reset to 0
 document.getElementById('loadQuote').addEventListener("click", function() {
     printQuote();
-    clearInterval(intervalID);
+    counter = 0;
 }, false);
