@@ -68,5 +68,11 @@ function printQuote() {
 // Initialize
 printQuote();
 
-// When the "Show another quote" button is clicked the "printQuote" function is called
-document.getElementById('loadQuote').addEventListener("click", printQuote, false);
+// Refresh the quote after 15 seconds
+let intervalID = setInterval(printQuote, 15000);
+
+// When the "Show another quote" button is clicked the "printQuote" function is called and setInterval() is stopped
+document.getElementById('loadQuote').addEventListener("click", function() {
+    printQuote();
+    clearInterval(intervalID);
+}, false);
