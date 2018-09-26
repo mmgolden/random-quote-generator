@@ -31,6 +31,9 @@ const quotes = [
     }
 ];
 
+// An empty array to hold used quotes
+let usedQuotes = [];
+
 // An array of hex codes
 const colors = ['#36b55c', '#5D3137', '#A6494F', '#48a59f', '#5f3277', '#3f85b7', '#962a96'];
 
@@ -42,10 +45,44 @@ function getRandomNumber(array) {
     return Math.floor(Math.random() * array.length);
 }
 
-// Return a random quote object from the array
-function getRandomQuote(array) {
-    const index = getRandomNumber(array);
-    return array[index];
+// Prevents repeating the current quote
+function preventRepeat(originalArray, usedArray) {
+    // Get a random number to use as an index
+    const index = getRandomNumber(originalArray);
+
+    // Removes the quote from the original array
+    const removed = originalArray.splice(index, 1);
+
+    // Pushes the removed quote to the used array
+    usedArray.push(removed[0]);
+
+    // Return the removed quote
+    return removed[0];
+}
+
+// Return a random quote from the array
+function getRandomQuote(originalArray, usedArray) {
+    // Get the length of the original array
+    let length = originalArray.length;
+
+    if (length > 0) {
+
+        // If the length of the original array is greater than 0 then call preventRepeat() and return a quote
+        return preventRepeat(originalArray, usedArray);
+        
+    } else if (length === 0) {
+
+        // If the length of the original array is 0 then push the quotes from the used array back to the original array
+        usedArray.forEach(quote => originalArray.push(quote));
+
+        // Change usedQuotes to an empty array
+        usedQuotes = [];
+
+        // Get a random number and return a quote from the original array
+        const index = getRandomNumber(originalArray);
+        return originalArray[index];
+
+    }
 }
 
 // Change the background to a random color
@@ -67,7 +104,7 @@ function autoRefresh() {
 // Insert the random quote into the DOM and change the background color
 // Only show the title, citation and year if they exist in the object
 function printQuote() {
-    const random = getRandomQuote(quotes);
+    const random = getRandomQuote(quotes, usedQuotes);
     
     const markup = `
         <p class="quote">${random.quote}</p>
